@@ -1,0 +1,57 @@
+###### AULA 1 - DOCKER e CONTAINRES
+
+-Criar a imagem a partir do dockerfile:
+docker image build -t conversao-temperatura .
+
+-Criar e rodar o container a partir da imagem:
+docker container run -d -p 8080:8080 conversao-temperatura
+
+-Boa pratica na nomeação:
+rangelpci/conversao-temepratura:v1 => namespace/repositório:tag/versão
+
+-Utilizar sempre imagens oficiais como base, para criar as minhas imagens
+
+-Sempre especificar a tag/versão base nas imagens:
+Ex: FROM node:14.17.5
+
+-MULTI STAGE BUILD:
+Em /go-app utilizamos o multi stage build para criarmos a primeira imagem que contém as ferramentas para compilar o app em GO,
+em seguida a segunda imagem útiliza apenas o app compilado da primeira imagem
+Tecnologias como React e Angular podem fazer uso do multi stage build
+
+-DOCKER REGISTRY
+Repositório de imagens docker -> criar container em um ou varios servidores
+
+-Push da imagem para o docker hub
+docker push rangelpci/conversao-temperatura:v1
+
+
+*Na virtualização é preciso instalar e gerênciar um SO para cada VM criada, com os containers é utilizada a simulação do SO, e o mesmo economiza muito recurso computacional
+
+*Facilita a transição entre os ambientes de desenvolvimento, homologação e produção de um software
+*Otimiza o fluxo de produção das aplicações
+*Permite grande diversidade nas aplicações, aceitando qualquer linguagem de programação
+
+Na primeira aula da iniciativa kubernetes aprendemos os comandos basicos do docker, criação de imagens a partir de um dockerfile, execução de containers e boas práticas.
+Aprendemos também as diferenças entre uma maquina virtual e um container,
+as vantagens de se trabalhar com containers como a facil transição entre os ambientes de desenvolvimento, homologação e produção, agora não tem essa de "funciona no meu PC".
+E também algo bastante interessante é que a utilização de containers possibilita usarmos linguagens que o próprio serviço de nuvem não suporta nativamente,
+um exemplo é o Azure App Service que não suporta a linguagem GO
+
+Para finalizar fizemos o deploy de uma aplicação simples no Azure App Service, que faz uma conversão de temperatura
+Link do app: https://rangel-docker.azurewebsites.net/
+
+###### AULA 2 – DESVENDANDO O KUBERNETES
+
+kubernetes -> é um orquestrador de containers
+
+-Criação de cluster kubernetes On-Premise
+Exige um maior conhecimento já que você fica responsavel por gerenciar tudo
+
+-Criação de cluster kubernetes As a Service
+Quem gerencia o cluster kubernetes é próprio cloud provider / serviço de nuvem
+
+-Criação de cluster kubernetes Local
+Para estudos / setup incial
+
+-K3D solução baseada em containers
